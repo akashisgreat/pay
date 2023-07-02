@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<style>
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+    .payment-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: .8em;
+    }
+
+    .payment-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #5ca0ff;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        display: block;
+        margin: auto;
+        margin-top: 1em;
+        width: fit-content;
+        text-decoration: none;
+    }
+
+
+    #upi_id {
+        text-align: center;
+        display: block;
+        border-radius: 5px;
+        padding: .5em .7em;
+        background-color: #f1f1f1;
+    }
+
+    #upi_qr_image {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        padding: .5em;
+    }
+
+    #upi_qr_image svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        padding: 5.5px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        scale: .7;
+
+    }
+
+    h1 {
+        padding: 0 1em;
+    }
+</style>
+
+<body>
+    <main>
+        <h1>Donate</h1>
+        <section class="payment-div">
+            <div id="upi_qr_image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill-rule="evenodd">
+                    <path d="M55.05 32.542L38.715 0l-18.15 64z" fill="#097939" />
+                    <path d="M43.433 32.542L27.1 0 8.95 64z" fill="#ed752e" />
+                </svg>
+            </div>
+            <span id="upi_id"></span>
+            <a id="pay" class="payment-button">Pay with UPI</a>
+        </section>
+    </main>
+    <script src="qrcode.min.js"></script>
+
+
+
+    <script>
+
+
+
+        UPI = {
+            id: "akashisgreat0000-1@okaxis",
+            name: "Akash Kumar",
+            amount: 10,
+            min_amount: 10,
+            currency: "INR",
+            note: "Money transfer",
+        }
+
+
+
+
+
+
+
+        UPI_URL = `upi://pay?&pa=${UPI.id}&pn=${UPI.name}&cu=${UPI.currency}&am=${UPI.amount}&mam=${UPI.min_amount}&tn=${UPI.note}`
+        console.log(UPI_URL);
+
+        upi_id.href = UPI_URL
+        upi_id.innerText = UPI.id
+        pay.href = UPI_URL
+
+
+        new QRCode("upi_qr_image", {
+            text: `${UPI_URL}`,
+            width: 250,
+            height: 250,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+
+
+
+    </script>
+</body>
+
+</htmt>
