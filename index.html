@@ -68,10 +68,10 @@
         top: 50%;
         left: 50%;
         translate: -50% -50%;
-        padding: 6px;
+        padding: 5px;
         background: #FFFFFF;
-        border-radius: 4px;
-        scale: .8;
+        border-radius: 3px;
+        scale: .7;
 
     }
 
@@ -82,7 +82,7 @@
 
 <body>
     <main>
-        <h1>Donate</h1>
+        <h1>Payment</h1>
         <section class="payment-div">
             <div id="upi_qr_image">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill-rule="evenodd">
@@ -91,6 +91,7 @@
                 </svg>
             </div>
             <span id="upi_id"></span>
+            <span id="name"></span>
             <a id="pay" class="payment-button">Pay with UPI</a>
         </section>
     </main>
@@ -101,10 +102,10 @@
     <script>
 
         UPI = {
-            id: "akashisgreat0000-1@okaxis",
-            name: "Name Here",
+            id: "akashisgreat@pnb",
+            name: "",
             amount: undefined,
-            note: "Money transfer",
+            note: "",
         }
 
 
@@ -112,9 +113,13 @@
 
         const url_id = urlParams.get('id');
         const url_name = urlParams.get('name');
+        const url_amount = urlParams.get('am');
+        const url_note = urlParams.get('note');
 
         UPI.id  = url_id || UPI.id
         UPI.name = url_name || UPI.name
+        UPI.amount = url_amount || UPI.amount
+        UPI.note = url_note || UPI.note
 
 
 
@@ -128,6 +133,7 @@
         upi_id.href = UPI_URL
         upi_id.innerText = UPI.id
         pay.href = UPI_URL
+        document.querySelector('#name').innerHTML = UPI.name
 
 
         new QRCode("upi_qr_image", {
