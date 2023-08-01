@@ -79,7 +79,6 @@
         padding: 0 1em;
     }
 </style>
-
 <body>
     <main>
         <h1>Payment</h1>
@@ -92,7 +91,8 @@
             </div>
             <span id="upi_id"></span>
             <span id="name"></span>
-            <a id="pay" class="payment-button">Pay with UPI</a>
+            <span id="amount"></span>
+            <a id="pay" class="payment-button">Pay With UPI</a>
         </section>
     </main>
     <script src="qrcode.min.js"></script>
@@ -116,24 +116,27 @@
         const url_amount = urlParams.get('am');
         const url_note = urlParams.get('note');
 
-        UPI.id  = url_id || UPI.id
+        UPI.id = url_id || UPI.id
         UPI.name = url_name || UPI.name
         UPI.amount = url_amount || UPI.amount
         UPI.note = url_note || UPI.note
 
 
 
-
-
-
-
-
         UPI_URL = `upi://pay?&pa=${UPI.id}&pn=${UPI.name}&am=${UPI.amount}&tn=${UPI.note}&tid=${UPI.tr}`
+
+
+
 
         upi_id.href = UPI_URL
         upi_id.innerText = UPI.id
         pay.href = UPI_URL
         document.querySelector('#name').innerHTML = UPI.name
+        if (!isNaN(parseInt(UPI.amount, 10))){
+            document.querySelector('#amount').innerHTML = '₹ ' + parseFloat(UPI.amount)
+        }
+
+        
 
 
         new QRCode("upi_qr_image", {
