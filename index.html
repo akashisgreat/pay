@@ -20,6 +20,10 @@
         color: rgb(59, 59, 59)
     }
 
+    h1 {
+        padding: 0 1em;
+    }
+
     .payment-div {
         display: flex;
         align-items: center;
@@ -28,32 +32,27 @@
         gap: .8em;
     }
 
+    .payment-details {
+        text-align: center;
+        border-radius: 5px;
+        padding: .4em .5em;
+        background-color: #e5e5e5;
+    }
+
     .payment-button {
         display: inline-block;
         padding: 10px 20px;
         background-color: #5ca0ff;
         color: #fff;
-        font-size: 16px;
         font-weight: bold;
         text-transform: uppercase;
         border: none;
         border-radius: 10px;
         box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
-        display: block;
         margin: auto;
-        margin-top: 1em;
         width: fit-content;
         text-decoration: none;
-    }
-
-
-    #upi_id {
-        text-align: center;
-        display: block;
-        border-radius: 5px;
-        padding: .5em .7em;
-        background-color: #e5e5e5;
     }
 
     #upi_qr_image {
@@ -74,11 +73,8 @@
         scale: .7;
 
     }
-
-    h1 {
-        padding: 0 1em;
-    }
 </style>
+
 <body>
     <main>
         <h1>Payment</h1>
@@ -89,55 +85,20 @@
                     <path d="M43.433 32.542L27.1 0 8.95 64z" fill="#ed752e" />
                 </svg>
             </div>
-            <span id="upi_id"></span>
-            <span id="name"></span>
-            <span id="amount"></span>
-            <a id="pay" class="payment-button">Pay With UPI</a>
+            <span id="upi_id" class="payment-details"></span>
+            <a id="pay" class="payment-button">Pay Now</a>
         </section>
     </main>
     <script src="qrcode.min.js"></script>
 
-
-
     <script>
-
-        UPI = {
-            id: "akashisgreat@pnb",
-            name: "",
-            amount: undefined,
-            note: "",
-        }
-
-
-        const urlParams = new URLSearchParams(window.location.search);
-
-        const url_id = urlParams.get('id');
-        const url_name = urlParams.get('name');
-        const url_amount = urlParams.get('am');
-        const url_note = urlParams.get('note');
-
-        UPI.id = url_id || UPI.id
-        UPI.name = url_name || UPI.name
-        UPI.amount = url_amount || UPI.amount
-        UPI.note = url_note || UPI.note
-
-
-
-        UPI_URL = `upi://pay?&pa=${UPI.id}&pn=${UPI.name}&am=${UPI.amount}&tn=${UPI.note}&tid=${UPI.tr}`
-
-
-
+        UPI = { id: "8252386857@postbank", }
+        // UPI_URL = `upi://pay?&pa=${UPI.id}&pn=${UPI.name}&am=${UPI.amount}&tn=${UPI.note}&tid=${UPI.tr}`
+        UPI_URL = `upi://pay?&pa=${UPI.id}`
 
         upi_id.href = UPI_URL
         upi_id.innerText = UPI.id
         pay.href = UPI_URL
-        document.querySelector('#name').innerHTML = UPI.name
-        if (!isNaN(parseInt(UPI.amount, 10))){
-            document.querySelector('#amount').innerHTML = '₹ ' + parseFloat(UPI.amount)
-        }
-
-        
-
 
         new QRCode("upi_qr_image", {
             text: `${UPI_URL}`,
@@ -145,11 +106,8 @@
             height: 300,
             colorDark: "#000000",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
+            // correctLevel: QRCode.CorrectLevel.H
         });
-
-
-
 
     </script>
 </body>
