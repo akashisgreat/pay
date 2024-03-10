@@ -1,4 +1,0 @@
-This is a Brave Creators publisher verification file.
-
-Domain: akashisgreat.github.io
-Token: 649c8f94f6382df942700d772a969f4b24d22094d14c4353848781bfec6e66eb
